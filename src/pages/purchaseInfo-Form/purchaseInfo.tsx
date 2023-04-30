@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import supabase from "../../../config/db";
 import router from "next/router";
+import { useDispatch } from "react-redux";
+import { clearCart } from "@/redux/cartSlice";
 
-export default function AddProduct() {
+export default function PurchaseInfo() {
+    const dispatch = useDispatch();
+
     const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
@@ -12,17 +16,18 @@ export default function AddProduct() {
             console.log("Fail to insert data");
             console.log(error);
         } else {
+            dispatch(clearCart());
+            alert("Thank you for your purchase!");
             router.push("/");
         }
     };
 
     const insertData = async (data: any) => {
-        const { error } = await supabase.from("products").insert({
+        const { error } = await supabase.from("orders").insert({
             name: data.name,
-            desc: data.desc,
-            price: data.price,
-            sale_price: data.sale_price,
-            thumbnail: data.thumbnail,
+            phone: data.phone,
+            email: data.email,
+            address: data.address,
         });
         return error;
     };
@@ -49,63 +54,48 @@ export default function AddProduct() {
                     </div>
                     <div className="mb-5">
                         <label
-                            htmlFor="desc"
+                            htmlFor="phone"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                         >
-                            Description
-                        </label>
-                        <input
-                            required
-                            type="text"
-                            name="desc"
-                            id="desc"
-                            placeholder="Description"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
-                    </div>
-                    <div className="mb-5">
-                        <label
-                            htmlFor="price"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
-                        >
-                            Price
+                            Phone number
                         </label>
                         <input
                             required
                             type="number"
-                            name="price"
-                            id="price"
-                            placeholder="Price"
+                            name="phone"
+                            id="phone"
+                            placeholder="phone number"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>
                     <div className="mb-5">
                         <label
-                            htmlFor="sale_price"
+                            htmlFor="email"
+                            className="mb-3 block text-base font-medium text-[#07074D]"
+                        >
+                            Email
+                        </label>
+                        <input
+                            required
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="email"
+                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                        />
+                    </div>
+                    <div className="mb-5">
+                        <label
+                            htmlFor="address"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                         >
                             Sale Price
                         </label>
                         <input
-                            type="number"
-                            name="sale_price"
-                            id="sale_price"
-                            placeholder="Sale Price"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
-                    </div>
-                    <div className="mb-5">
-                        <label
-                            htmlFor="thumbnail"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
-                        >
-                            Thumbnail
-                        </label>
-                        <input
                             type="text"
-                            name="thumbnail"
-                            id="thumbnail"
-                            placeholder="URL"
+                            name="address"
+                            id="address"
+                            placeholder="address"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>

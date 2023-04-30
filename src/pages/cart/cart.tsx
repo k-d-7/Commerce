@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteItem, selectCartItems } from "@/redux/cartSlice";
 import { IItemCart } from "@/interfaces/itemCart.interface";
+import Link from "next/link";
 
 type CartProps = {
     itemCart: IItemCart;
@@ -146,17 +147,17 @@ const Cart: React.FC<CartProps> = ({ itemCart }) => {
                         </div>
                     </div>
 
-                    <div className="flex justify-end font-bold space-x-4 text-2xl border-t border-gray-100 px-5 py-4">
-                    <a
-                        href="#"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                        Paid
-                    </a>
-                    </div>
-                    {/* <div className="flex justify-end">
-                    <input type="hidden" className="border border-black bg-gray-50" x-model="selected" />
-                </div> */}
+                    {items.length > 0 ? (
+                        <div className="flex justify-end font-bold space-x-4 text-2xl border-t border-gray-100 px-5 py-4">
+                            <Link href="/purchaseInfo-Form/purchaseInfo" legacyBehavior>
+                            <a
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            >
+                                Purchase
+                            </a>
+                            </Link>
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </section>

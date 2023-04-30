@@ -27,7 +27,7 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
     let sale = ((product.price - product.sale_price) / product.price) * 100;
     return (
         <div className="py-1">
-            <div className="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="flex max-w-md h-60 bg-white shadow-lg rounded-lg overflow-hidden">
                 <img
                     className="w-1/3 bg-cover"
                     src={product.thumbnail}
