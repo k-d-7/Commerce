@@ -88,9 +88,16 @@ const Navbar = () => {
                         <div>
                             <Link href="/addProduct-Form/addProduct" legacyBehavior>
                                 <button
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
                                 >
                                     Add Product
+                                </button>
+                            </Link>
+                            <Link href="/orderTable/orderTable" legacyBehavior>
+                                <button
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
+                                >
+                                    View Orders
                                 </button>
                             </Link>
                             <Link href="/" legacyBehavior>

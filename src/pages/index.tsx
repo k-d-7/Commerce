@@ -12,15 +12,17 @@ export default function Home() {
     const [loading, setLoading] = useState<boolean>(true);
 
     const getData = async () => {
-        const { data: data, error } = await supabase.from("products").select("*");
+        const { data: data, error } = await supabase
+            .from("products")
+            .select("*");
         console.log(data, " ", error);
         if (error) {
             console.log("Fail to load data");
             console.log(error);
         } else {
             setData(data);
+            setLoading(false);
         }
-        setLoading(false);
     };
     useEffect(() => {
         getData();
