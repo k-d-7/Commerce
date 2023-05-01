@@ -31,7 +31,7 @@ const Navbar = () => {
                         Kds ECommerce
                     </a>
                 </Link>
-                <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+                <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-1">
                     <li>
                         <a className="hover:text-gray-200" href="#"></a>
                     </li>
@@ -41,9 +41,8 @@ const Navbar = () => {
                     <li>
                         <a className="hover:text-gray-200" href="#"></a>
                     </li>
-                
                 </ul>
-                <div className="hidden xl:flex items-center space-x-5 items-center">
+                <div className="xl:flex items-center space-x-5">
                     <Link href="/cart/cart" legacyBehavior>
                         <a
                             className="flex items-center hover:text-gray-200"
@@ -64,14 +63,9 @@ const Navbar = () => {
                                 />
                             </svg>
                             <span className="flex absolute -mt-5 ml-4">
-                                {
-                                    haveCart ? 
-                                    (
-                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
-                                    )
-                                    : 
-                                    null
-                                }
+                                {haveCart ? (
+                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
+                                ) : null}
                             </span>
                         </a>
                     </Link>
@@ -86,17 +80,16 @@ const Navbar = () => {
                         </Link>
                     ) : (
                         <div>
-                            <Link href="/addProduct-Form/addProduct" legacyBehavior>
-                                <button
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
-                                >
+                            <Link
+                                href="/addProduct-Form/addProduct"
+                                legacyBehavior
+                            >
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1">
                                     Add Product
                                 </button>
                             </Link>
                             <Link href="/orderTable/orderTable" legacyBehavior>
-                                <button
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
-                                >
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1">
                                     View Orders
                                 </button>
                             </Link>

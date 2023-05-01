@@ -42,13 +42,14 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
                     <p className="mt-2 text-gray-600 text-sm">
                         Sale off {sale} &#37;
                     </p>
-                    <div className="flex item-center justify-between mt-3">
+                    <div className="flex item-center justify-between flex-col mt-3">
                         <h1 className="text-gray-700 font-bold text-xl">
                             {
                                 (product.sale_price = 0
                                     ? product.price
                                     : product.sale_price)
                             }
+                            
                         </h1>
                         <button
                             className="px-3 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded"
