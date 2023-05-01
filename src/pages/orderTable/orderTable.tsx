@@ -5,14 +5,10 @@ export default function OrderTable() {
 
     //fetch data from join table
     const [data, setData] = useState<any>(null);
-    //fetch data from order table
-    const [order, setOrder] = useState<any>(null);
-    //fetch data from product table
-    const [product, setProduct] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     const getData = async () => {
-        const { data, error } = await supabase.from("orders_products").select("*");
+        const { data, error } = await supabase.from("orders").select("*");
         console.log(data, " ", error);
         if (error) {
             console.log("Fail to load data from join table");
@@ -22,31 +18,6 @@ export default function OrderTable() {
             setLoading(false);
         }
     };
-
-    const getOrder = async (id: number) => {
-        const { data, error } = await supabase.from("orders").select("*").filter("id", "eq", id).single();
-        console.log(id);
-        // console.log(order, " ", error);
-        if (error) {
-            console.log("Fail to load data from order table");
-            console.log(error);
-        } else {
-            setOrder(data);
-        }
-    };
-
-    const getProduct = async (id: number) => {
-        const { data, error } = await supabase.from("products").select("*").filter("id", "eq", id).single();
-        console.log(id);
-        // console.log(product, " ", error);
-        if (error) {
-            console.log("Fail to load data from product table");
-            console.log(error);
-        } else {
-            setProduct(data);
-        }
-    };
-
 
     useEffect(() => {
         getData();
@@ -105,47 +76,27 @@ export default function OrderTable() {
                                     >
                                         Address
                                     </th>
-                                    <th
-                                        scope="col"
-                                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                                    >
-                                        Product
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                                    >
-                                        Quantity
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     data.map((item: any) => {
-                                        getOrder(item.order_id);
-                                        getProduct(item.product_id);                                       
                                         return (
                                             <tr className="bg-gray-100 border-b" key={item.id}>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {item.id}
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {order.name}
+                                                    {item.name}
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {order.phone}
+                                                    {item.phone}
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {order.email}
+                                                    {item.email}
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {order.address}
-                                                </td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {product.name}
-                                                </td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {item.quantity}
+                                                    {item.address}
                                                 </td>
                                             </tr>
                                         );
